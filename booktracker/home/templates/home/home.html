@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <div class="container">
+        <h1>Dashboard</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+        {% for post in posts %}
+            <br />
+            <div class="card">
+                <div class="card-header">
+                Book:
+                </div>
+                <div class="card-body">
+                    <h1>{{ post.book_title }}</h1>
+                    <p>By: {{ post.book_author }}</p>
+                    <p>Posted by: {{ post.user.get_full_name }}</p>
+                    <p>Rating: {{post.avg_rating}}</p>
+                </div>
+            </div>
+            <br />
+        {% endfor %}
+    </div>
+{% endblock %}
+
